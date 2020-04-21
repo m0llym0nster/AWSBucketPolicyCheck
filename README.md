@@ -1,6 +1,5 @@
 # AWSBucketPolicyCheck
-
-sorry still in draft version... use at your own risk
+!!!still draft/testing this out, be careful!
 
 pulls all buckets in s3 and all principals from bucket policies
 
@@ -8,6 +7,8 @@ have instance role or aws credentials setup with access to s3 list all buckets a
 
 ./checkForRoot
 puts output called BucketPol.csv in directory it is ran from
+
+![csv ouptut example](https://github.com/m0llym0nster/AWSBucketPolicyCheck/blob/master/images/Output.png)
 
 soonest - will check with more sids than 1
 sooner - will look for root in principals listing
