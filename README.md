@@ -10,7 +10,7 @@ puts output called BucketPol.csv in directory it is ran from
 
 ![csv ouptut example](https://github.com/m0llym0nster/AWSBucketPolicyCheck/blob/master/images/Output.png)
 
-soonest - will check with more sids than 1
+soonest - will test and ensure it works with more sids than 1
 
 sooner - will look for root in principals listing
 
