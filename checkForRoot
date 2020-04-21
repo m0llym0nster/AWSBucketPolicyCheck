@@ -1,0 +1,57 @@
+#!/usr/local/bin/python3
+
+import boto3
+import json
+from botocore.exceptions import ClientError
+
+
+##startvars
+bucketPoldict={}
+polDict={}
+
+######### Retrieve the list of existing buckets
+s3 = boto3.client('s3')
+response = s3.list_buckets()
+#print (response) 
+#response is a dict with lists of dicts - get bucket dict
+x = response["Buckets"]
+#print(x)
+
+for bucket in range(len(x)):
+#get every dict in the list and pull the dict key Name from each one 
+	y = x[bucket] 
+	z = y["Name"]
+#initialize each key to the bucket name
+	bucketPoldict[z] = ""
+
+print (bucketPoldict)
+
+#bucketname = "blackhatcats.com"
+
+###### get bucket policy
+s3 = boto3.client('s3')
+#bucket_policy = s3.BucketPolicy('bucket_name')
+for bucket in bucketPoldict:
+	try:
+		bucket_policy = s3.get_bucket_policy(Bucket=bucket)
+	except ClientError as e:
+		if e.response['Error']['Code'] == 'NoSuchBucketPolicy':
+			bucket_policy = {'Policy':'None'}
+		else: print ("a real error has occurred")
+#	print (bucket_policy)
+	polDict[bucket] = bucket_policy["Policy"]
+
+print (polDict)
+
+########pull principals out of bucket policy for comparision
+for bucket in polDict:
+	policy = polDict[bucket]
+	if policy != "None":
+		jpol = json.loads(policy)
+		statement = jpol['Statement']
+	#	abc = type(statement)
+	#	print (abc)
+		for item in statement:
+			print (item['Principal'])
+		bucketPoldict[bucket] = item['Principal']
+print (bucketPoldict)
