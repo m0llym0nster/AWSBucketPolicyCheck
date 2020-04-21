@@ -1,9 +1,13 @@
 #!/usr/local/bin/python3
+##Script to enumerate bucket policies
+##it's not done yet
+##by m0llym0nster
+
 
 import boto3
 import json
 from botocore.exceptions import ClientError
-
+import csv
 
 ##startvars
 bucketPoldict={}
@@ -26,7 +30,6 @@ for bucket in range(len(x)):
 
 print (bucketPoldict)
 
-#bucketname = "blackhatcats.com"
 
 ###### get bucket policy
 s3 = boto3.client('s3')
@@ -53,5 +56,11 @@ for bucket in polDict:
 	#	print (abc)
 		for item in statement:
 			print (item['Principal'])
-		bucketPoldict[bucket] = item['Principal']
+			bucketPoldict[bucket] = item['Principal']
 print (bucketPoldict)
+
+####Print to CSV
+w = csv.writer(open("BucketPol.csv","w"))
+for key,val in bucketPoldict.items():
+	w.writerow([key, val])
+
