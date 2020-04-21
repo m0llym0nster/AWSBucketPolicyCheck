@@ -8,7 +8,7 @@ have instance role or aws credentials setup with access to s3 list all buckets a
 ./checkForRoot
 puts output called BucketPol.csv in directory it is ran from
 
-![csv ouptut example]()
+![csv ouptut example](https://github.com/m0llym0nster/AWSBucketPolicyCheck/blob/master/images/Output.png)
 
 soonest - will test and ensure it works with more sids than 1
 
