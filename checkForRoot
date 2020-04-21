@@ -61,6 +61,7 @@ print (bucketPoldict)
 
 ####Print to CSV
 w = csv.writer(open("BucketPol.csv","w"))
+w.writerow(["Bucket","Principal"])
 for key,val in bucketPoldict.items():
 	w.writerow([key, val])
 
